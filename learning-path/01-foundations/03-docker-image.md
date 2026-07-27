@@ -23,7 +23,7 @@ Giả sử một nhóm phát triển có mã nguồn Spring Boot và file `pom.x
 
 Cách truyền thống là viết một tài liệu cài đặt thật dài rồi hy vọng mọi người làm đúng. Vấn đề là tài liệu mô tả một môi trường, còn máy thực tế vẫn có thể lệch khỏi mô tả. Docker giải quyết một phần quan trọng của khoảng cách này bằng **[Image](../../reference/glossary.md#image)** — gói mẫu chỉ đọc dùng làm đầu vào để tạo Container.
 
-Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ điều hành), CPU architecture (kiến trúc bộ xử lý), secret (dữ liệu bí mật), network (mạng), volume (vùng dữ liệu độc lập) và tài nguyên lúc chạy vẫn đến từ bên ngoài. Image không nhất thiết chứa hệ điều hành hoàn chỉnh: nhiều Image chỉ có file tối thiểu, còn Container dùng kernel của host (máy chạy Docker) qua container runtime. Mental model, tức mô hình tư duy, đúng là “đóng gói nội dung và giá trị mặc định”, không phải “đóng gói cả một máy”.
+Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ điều hành), CPU architecture (kiến trúc bộ xử lý), secret (dữ liệu bí mật), network (mạng), volume (vùng dữ liệu độc lập) và tài nguyên lúc chạy vẫn đến từ bên ngoài. Image không nhất thiết chứa hệ điều hành hoàn chỉnh: nhiều Image chỉ có file tối thiểu. Container dùng kernel do môi trường chạy container runtime cung cấp. Với Linux Container trên Docker Desktop, kernel nằm trong môi trường Linux do Docker Desktop quản lý, như Linux VM (máy ảo Linux) hoặc WSL 2, không phải trực tiếp kernel Windows/macOS; nền tảng hoặc chế độ cô lập khác có thể khác. Mental model, tức mô hình tư duy, đúng là “đóng gói nội dung và giá trị mặc định”, không phải “đóng gói cả một máy”.
 
 ## 2. Hiểu nhanh và định nghĩa chính xác
 
