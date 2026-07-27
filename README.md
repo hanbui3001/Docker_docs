@@ -36,8 +36,13 @@ Lộ trình đi từ **hiểu** mental model, **điều khiển** vòng đời, 
 
 | Phần | Trọng tâm | Trạng thái |
 |---|---|---|
-| [Part 01. Docker Foundations](learning-path/01-foundations/README.md) | Mental model nền tảng về Docker, Image, Container và hệ sinh thái | Đang triển khai |
+| [Part 01. Docker Foundations](learning-path/01-foundations/README.md) | Mental model nền tảng về Docker, Image, Container và hệ sinh thái | Có thể đọc |
+| [1. Docker là gì?](learning-path/01-foundations/01-docker-la-gi.md) | Vấn đề Docker giải quyết, use case và giới hạn | Có thể đọc |
+| [2. Docker hoạt động như thế nào?](learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md) | Client, API, Engine, Daemon và các luồng build, pull, run | Có thể đọc |
 | [3. Docker Image](learning-path/01-foundations/03-docker-image.md) | Cấu trúc Image, layer, metadata và quan hệ với Container | Có thể đọc |
+| [4. Docker Container](learning-path/01-foundations/04-docker-container.md) | Runtime instance, lifecycle, isolation và writable state | Có thể đọc |
+| [5. Image và Container](learning-path/01-foundations/05-image-va-container.md) | Mental model kết hợp và các quan hệ vòng đời | Có thể đọc |
+| [6. Bức tranh tổng thể](learning-path/01-foundations/06-buc-tranh-tong-the.md) | Luồng từ Dockerfile đến Image, Registry, Container, dữ liệu và kết nối | Có thể đọc |
 | Part 02. CLI & Lifecycle | Cú pháp CLI và vòng đời Docker object | Thiết kế đã được duyệt; chưa triển khai |
 | Part 03. Storage & Networking | Volume, bind mount, network và kết nối service | Thiết kế đã được duyệt; chưa triển khai |
 | Part 04. Dockerfile | Build context, instruction, cache và multi-stage build | Thiết kế đã được duyệt; chưa triển khai |
@@ -55,6 +60,7 @@ Tài liệu dùng chung hiện có:
 
 - Chapter trong Learning Path dùng số thứ tự để thể hiện vị trí học được khuyến nghị.
 - Thuật ngữ kỹ thuật tiếng Anh được giữ nguyên và giải thích bằng tiếng Việt ở lần xuất hiện đầu tiên.
+- Định nghĩa sâu liên kết tới Glossary; mỗi mục Glossary có backlink về đúng đoạn đang học.
 - Syntax quan trọng được phân tích từ token, scope và giá trị đã resolve đến trạng thái trước và sau khi thực thi.
 - Các quan niệm dễ gây hiểu nhầm được nêu rõ, sửa bằng mental model chính xác và đi kèm cách kiểm chứng.
 - Diagram dùng Mermaid khi relationship, sequence hoặc state change khó diễn đạt gọn bằng văn xuôi; mỗi diagram đều được giải thích ở phần liền kề.
@@ -64,8 +70,8 @@ Tài liệu dùng chung hiện có:
 
 | Phạm vi | Trạng thái |
 |---|---|
-| Slice đầu tiên: book cover, quy chuẩn, glossary, Foundation index và chapter Docker Image | Đang triển khai |
-| Part 01 hoàn chỉnh | Chưa hoàn thành |
+| Slice đầu tiên: book cover, quy chuẩn, glossary và Foundation hoàn chỉnh | Hoàn thành |
+| Part 01 hoàn chỉnh | Có thể đọc |
 | Parts 02-08 | Thiết kế đã được duyệt; chưa triển khai |
 
-Repository đang xuất bản slice đầu tiên để kiểm chứng format trước khi mở rộng toàn bộ cuốn sách. Trạng thái trong mục lục phản ánh file hiện có; roadmap chưa có file đích được giữ dưới dạng plain text để không tạo broken link.
+Part 01 hiện là nền tảng hoàn chỉnh để bắt đầu Part 02: CLI & Lifecycle. Các phần chưa có file đích tiếp tục được giữ dưới dạng plain text để không tạo broken link.

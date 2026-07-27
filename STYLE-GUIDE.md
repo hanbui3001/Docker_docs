@@ -146,6 +146,25 @@ Quy tắc thuật ngữ:
 - Khi cần định nghĩa sâu hơn, liên kết đến glossary trung tâm bằng relative repository link.
 - Một định nghĩa đầy đủ theo thứ tự: cách hiểu nhanh, nghĩa Docker chính xác, ví dụ hoặc ẩn dụ, rồi giới hạn của ẩn dụ.
 
+Khi một thuật ngữ dẫn người đọc sang Glossary, chapter phải đặt một source anchor ngay tại lần xuất hiện đó. Glossary thêm mục **Quay lại nơi đang học** ở cuối định nghĩa và trỏ về source anchor, để người đọc trở lại đúng đoạn thay vì đầu chapter.
+
+Quy ước anchor:
+
+```markdown
+<a id="back-03-docker-image-filesystem"></a>
+**[Filesystem](../../reference/glossary.md#filesystem)** — cây thư mục và file mà môi trường nhìn thấy.
+```
+
+Backlink trong Glossary:
+
+```markdown
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-filesystem)
+```
+
+- Dùng mẫu `back-<chapter-slug>-<term-slug>` và giữ anchor duy nhất trong mỗi file.
+- Nếu nhiều chapter cùng dẫn tới một thuật ngữ, Glossary liệt kê các backlink trên cùng một dòng, phân cách bằng `·`.
+- Backlink chỉ trỏ tới file và anchor đã tồn tại; không dùng JavaScript history vì GitHub Markdown không bảo đảm hỗ trợ.
+
 ## 7. Callout
 
 Chỉ dùng bốn loại GitHub callout sau:

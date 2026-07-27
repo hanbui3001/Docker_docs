@@ -11,7 +11,7 @@
 > - Mô tả luồng build, pull, push và tạo Container từ Image.
 > - Dùng output inspect và history để kiểm chứng quan hệ Image–Container.
 
-[Mục lục Foundation](README.md)
+[← 2. Docker hoạt động như thế nào?](02-docker-hoat-dong-nhu-the-nao.md) · [Mục lục Foundation](README.md) · [4. Docker Container →](04-docker-container.md)
 
 ---
 
@@ -24,10 +24,10 @@ Giả sử một nhóm có mã nguồn Spring Boot và `pom.xml`. Một máy ch�
 - Java runtime, tức môi trường thực thi bytecode Java, phải có phiên bản và biến thể phù hợp.
 - Các dependency, tức thư viện phụ thuộc mà ứng dụng cần lúc build hoặc lúc chạy, phải hiện diện đúng phiên bản.
 - Resource, tức tài nguyên đi kèm như file cấu hình, mẫu hiển thị, chứng thư hoặc file tĩnh, phải nằm đúng đường dẫn.
-- Nội dung **[Filesystem](../../reference/glossary.md#filesystem)** — cây thư mục và file mà môi trường nhìn thấy — phải có quyền truy cập và cấu trúc dự kiến.
+- Nội dung <a id="back-03-docker-image-filesystem"></a> **[Filesystem](../../reference/glossary.md#filesystem)** — cây thư mục và file mà môi trường nhìn thấy — phải có quyền truy cập và cấu trúc dự kiến.
 - Cấu hình khởi động như command (lệnh), environment variable (biến môi trường), working directory (thư mục làm việc) và user (tài khoản) phải nhất quán.
 
-Cách truyền thống là viết tài liệu cài đặt rồi hy vọng máy thực tế không lệch khỏi mô tả. Docker thu hẹp khoảng cách này bằng **[Image](../../reference/glossary.md#image)** — gói mẫu chỉ đọc dùng làm đầu vào để tạo Container.
+Cách truyền thống là viết tài liệu cài đặt rồi hy vọng máy thực tế không lệch khỏi mô tả. Docker thu hẹp khoảng cách này bằng <a id="back-03-docker-image-image"></a> **[Image](../../reference/glossary.md#image)** — gói mẫu chỉ đọc dùng làm đầu vào để tạo Container.
 
 Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ điều hành), CPU architecture (kiến trúc bộ xử lý), secret (dữ liệu bí mật), network (mạng), volume (vùng dữ liệu độc lập) và tài nguyên runtime vẫn đến từ bên ngoài. Nhiều Image chỉ chứa file tối thiểu, không phải hệ điều hành hoàn chỉnh. Container dùng kernel do môi trường runtime cung cấp; Linux Container trên Docker Desktop dùng môi trường Linux được quản lý như Linux VM hoặc WSL 2, không trực tiếp dùng kernel Windows/macOS. Mental model đúng là “đóng gói nội dung và giá trị mặc định”, không phải “đóng gói cả một máy”.
 
@@ -35,7 +35,7 @@ Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ �
 
 ### 2.1 Phép so sánh: khuôn đúc và sản phẩm được đúc
 
-Có thể hình dung Image như một khuôn đúc đã được chuẩn hóa. Một khuôn có thể tạo nhiều sản phẩm; sửa một sản phẩm đã đúc không làm khuôn tự đổi; muốn thay thiết kế, ta tạo khuôn mới. Tương tự, một Image có thể tạo nhiều **[Container](../../reference/glossary.md#container)** — môi trường chạy cụ thể có cấu hình runtime, trạng thái vòng đời và filesystem riêng.
+Có thể hình dung Image như một khuôn đúc đã được chuẩn hóa. Một khuôn có thể tạo nhiều sản phẩm; sửa một sản phẩm đã đúc không làm khuôn tự đổi; muốn thay thiết kế, ta tạo khuôn mới. Tương tự, một Image có thể tạo nhiều <a id="back-03-docker-image-container"></a> **[Container](../../reference/glossary.md#container)** — môi trường chạy cụ thể có cấu hình runtime, trạng thái vòng đời và filesystem riêng.
 
 Giới hạn của phép so sánh: Image còn chứa dữ liệu file và cấu hình mặc định. Container cũng không sao chép vật lý toàn bộ Image; nhiều Container dùng chung dữ liệu chỉ đọc rồi thêm phần ghi riêng.
 
@@ -46,13 +46,13 @@ Docker mô tả container image là gói chuẩn hóa gồm file, binary (file t
 1. **Nội dung chỉ đọc** tạo nên góc nhìn filesystem ban đầu.
 2. **Cấu hình mặc định** giúp runtime biết nên khởi tạo Container như thế nào.
 
-**[Filesystem layer](../../reference/glossary.md#filesystem-layer)** — lớp thay đổi filesystem — ghi một tập thay đổi như thêm, sửa hoặc đánh dấu xóa đường dẫn so với lớp bên dưới. Nhiều layer được ghép theo thứ tự để người dùng nhìn thấy một cây thư mục thống nhất.
+<a id="back-03-docker-image-filesystem-layer"></a> **[Filesystem layer](../../reference/glossary.md#filesystem-layer)** — lớp thay đổi filesystem — ghi một tập thay đổi như thêm, sửa hoặc đánh dấu xóa đường dẫn so với lớp bên dưới. Nhiều layer được ghép theo thứ tự để người dùng nhìn thấy một cây thư mục thống nhất.
 
-**[Metadata](../../reference/glossary.md#metadata)** — dữ liệu mô tả hoặc điều khiển cách một object (đối tượng Docker) được xử lý — gồm kiến trúc, hệ điều hành, label (nhãn), lịch sử và cấu hình. Nó không phải một file duy nhất; cũng không phải mọi metadata đều tác động trực tiếp lúc chạy.
+<a id="back-03-docker-image-metadata"></a> **[Metadata](../../reference/glossary.md#metadata)** — dữ liệu mô tả hoặc điều khiển cách một object (đối tượng Docker) được xử lý — gồm kiến trúc, hệ điều hành, label (nhãn), lịch sử và cấu hình. Nó không phải một file duy nhất; cũng không phải mọi metadata đều tác động trực tiếp lúc chạy.
 
-**[Image configuration](../../reference/glossary.md#image-configuration)** — object JSON (định dạng dữ liệu có cấu trúc) mô tả Image và mặc định runtime — có thể chứa environment, entrypoint (chương trình khởi đầu), command, working directory, user và thứ tự thay đổi filesystem. Byte file ứng dụng nằm trong layer, không nằm ở configuration.
+<a id="back-03-docker-image-image-configuration"></a> **[Image configuration](../../reference/glossary.md#image-configuration)** — object JSON (định dạng dữ liệu có cấu trúc) mô tả Image và mặc định runtime — có thể chứa environment, entrypoint (chương trình khởi đầu), command, working directory, user và thứ tự thay đổi filesystem. Byte file ứng dụng nằm trong layer, không nằm ở configuration.
 
-Khi Docker tạo một Container từ Image, Container là một **[Instance](../../reference/glossary.md#instance)** — bản thể cụ thể được hiện thực hóa từ một khuôn dùng lại được. `Instance` chỉ là thuật ngữ giải thích quan hệ; Docker CLI không có object riêng tên `instance`.
+Khi Docker tạo một Container từ Image, Container là một <a id="back-03-docker-image-instance"></a> **[Instance](../../reference/glossary.md#instance)** — bản thể cụ thể được hiện thực hóa từ một khuôn dùng lại được. `Instance` chỉ là thuật ngữ giải thích quan hệ; Docker CLI không có object riêng tên `instance`.
 
 ## 3. Image dùng để làm gì?
 
@@ -62,7 +62,7 @@ Image gom ứng dụng và giá trị mặc định vào một object có thể 
 
 ### 3.2 Phân phối một đơn vị chuẩn hóa
 
-Image có thể đi giữa máy phát triển, hệ thống CI và môi trường triển khai qua **[Registry](../../reference/glossary.md#registry)** — dịch vụ lưu trữ, phân phối Image. **CI (continuous integration)** tự động tích hợp và kiểm tra thay đổi; đăng nhập, policy và pipeline thuộc phần sau.
+Image có thể đi giữa máy phát triển, hệ thống CI và môi trường triển khai qua <a id="back-03-docker-image-registry"></a> **[Registry](../../reference/glossary.md#registry)** — dịch vụ lưu trữ, phân phối Image. **CI (continuous integration)** tự động tích hợp và kiểm tra thay đổi; đăng nhập, policy và pipeline thuộc phần sau.
 
 ### 3.3 Đầu vào có phiên bản cho deployment
 
@@ -115,7 +115,7 @@ Runtime kết hợp các giá trị này với option lúc tạo Container. Giá
 
 ### 4.3 Không phải mọi Dockerfile instruction tạo filesystem layer
 
-**[Dockerfile](../../reference/glossary.md#dockerfile)** — file khai báo instruction để builder (bộ dựng) tạo Image — có instruction đổi file và instruction chủ yếu đổi cấu hình. `COPY` thường đổi filesystem, còn `CMD` đặt command mặc định và có thể xuất hiện trong history với `0B`. Vì vậy số dòng history có thể lớn hơn số filesystem layer.
+<a id="back-03-docker-image-dockerfile"></a> **[Dockerfile](../../reference/glossary.md#dockerfile)** — file khai báo instruction để builder (bộ dựng) tạo Image — có instruction đổi file và instruction chủ yếu đổi cấu hình. `COPY` thường đổi filesystem, còn `CMD` đặt command mặc định và có thể xuất hiện trong history với `0B`. Vì vậy số dòng history có thể lớn hơn số filesystem layer.
 
 Cache (kết quả build tái sử dụng), quan hệ instruction với build step (bước dựng), và multi-stage build (dựng nhiều giai đoạn) thuộc Part 04. Ở đây chỉ cần nhớ layer khác configuration; không đếm dòng Dockerfile để suy ra cấu trúc Image.
 
@@ -130,13 +130,13 @@ Docker Docs gọi Image là **immutable** (bất biến): nội dung đã tạo 
 
 ### 5.2 Tag là tên có thể di chuyển
 
-**[Repository](../../reference/glossary.md#repository)** — không gian tên nhóm các phiên bản liên quan trong Registry — có thể chứa nhiều tham chiếu. **[Tag](../../reference/glossary.md#tag)** — nhãn dễ đọc như `alpine`, `1.0` hoặc `latest` — ánh xạ tên đó tới một manifest hoặc image index tại một thời điểm.
+<a id="back-03-docker-image-repository"></a> **[Repository](../../reference/glossary.md#repository)** — không gian tên nhóm các phiên bản liên quan trong Registry — có thể chứa nhiều tham chiếu. <a id="back-03-docker-image-tag"></a> **[Tag](../../reference/glossary.md#tag)** — nhãn dễ đọc như `alpine`, `1.0` hoặc `latest` — ánh xạ tên đó tới một manifest hoặc image index tại một thời điểm.
 
 Trong `nginx:alpine`, `nginx` là repository và `alpine` là Tag. Publisher (bên phát hành) có thể chuyển Tag sang bản mới, nên hai lần pull ở hai thời điểm không bảo đảm cùng nội dung.
 
 ### 5.3 Digest nhận diện nội dung cụ thể
 
-**[Digest](../../reference/glossary.md#digest)** — định danh content-addressable, tức được tính từ byte nội dung — thường có dạng `sha256:<chuỗi-hex>`. Object đổi thì Digest đổi; `name@sha256:...` vì thế cố định hơn Tag.
+<a id="back-03-docker-image-digest"></a> **[Digest](../../reference/glossary.md#digest)** — định danh content-addressable, tức được tính từ byte nội dung — thường có dạng `sha256:<chuỗi-hex>`. Object đổi thì Digest đổi; `name@sha256:...` vì thế cố định hơn Tag.
 
 Cần hỏi “Digest của object nào?”. **Descriptor** là bản ghi OCI chứa loại, kích thước và Digest của nội dung đích; nó có thể trỏ đến index, manifest, configuration hoặc layer. Image ID cục bộ và các Digest đó không phải một khái niệm chỉ vì đều bắt đầu bằng `sha256:`.
 
@@ -154,13 +154,13 @@ Sơ đồ có hai đường vào kho Image cục bộ. `Dockerfile -> docker bui
 
 Từ `Local Image`, `docker run` tạo và khởi động Container mới mà không biến hoặc xóa Image. `docker push` gửi nội dung lên Registry; Registry lưu và phân phối, không chạy process (tiến trình).
 
-Các mũi tên chỉ mô tả hướng dữ liệu, không phải tutorial phát hành. Authentication (xác thực), naming (đặt tên), quyền Registry và **[Build context](../../reference/glossary.md#build-context)** — tập dữ liệu builder được phép dùng — thuộc phần sau.
+Các mũi tên chỉ mô tả hướng dữ liệu, không phải tutorial phát hành. Authentication (xác thực), naming (đặt tên), quyền Registry và <a id="back-03-docker-image-build-context"></a> **[Build context](../../reference/glossary.md#build-context)** — tập dữ liệu builder được phép dùng — thuộc phần sau.
 
 ---
 
 ## 7. Quan sát Image bằng Docker CLI
 
-**Docker CLI (command-line interface)** là giao diện dòng lệnh gửi yêu cầu tới **[Daemon](../../reference/glossary.md#daemon)** — tiến trình nền quản lý Docker object. Cú pháp nền tảng:
+**Docker CLI (command-line interface)** là giao diện dòng lệnh gửi yêu cầu tới <a id="back-03-docker-image-daemon"></a> **[Daemon](../../reference/glossary.md#daemon)** — tiến trình nền quản lý Docker object. Cú pháp nền tảng:
 
 ```text
 docker [GLOBAL OPTIONS] COMMAND [COMMAND OPTIONS] [ARGUMENTS]
@@ -254,7 +254,7 @@ docker container run --name image-demo --detach nginx:alpine
 
 Về lifecycle, `run` bao gồm tạo như `docker container create` rồi khởi động như `docker container start`: nó luôn tạo Container mới, không khởi động lại một Container đã tồn tại.
 
-Trước `run`, Image không có process hay lifecycle state. Sau `run`, `image-demo` có process, trạng thái `running` và một **[Writable layer](../../reference/glossary.md#writable-layer)** — lớp ghi riêng của Container; Image nguồn không đổi.
+Trước `run`, Image không có process hay lifecycle state. Sau `run`, `image-demo` có process, trạng thái `running` và một <a id="back-03-docker-image-writable-layer"></a> **[Writable layer](../../reference/glossary.md#writable-layer)** — lớp ghi riêng của Container; Image nguồn không đổi.
 
 ```bash
 docker container inspect --format 'Image={{.Image}}; Status={{.State.Status}}' image-demo
@@ -369,7 +369,7 @@ Writable layer nhận thay đổi file không đi qua mount. Vì vậy Container
 
 ## 12. Học tiếp
 
-- Quay lại [Mục lục Foundation](README.md) để theo dõi các chapter nền tảng khi chúng được xuất bản.
+- Đọc tiếp [4. Docker Container](04-docker-container.md) để hiểu runtime instance được tạo từ Image có process, lifecycle và writable state riêng như thế nào.
 - Dùng [Docker Glossary](../../reference/glossary.md) khi cần phân biệt Image, Container, Tag, Digest, Registry và Writable layer bằng định nghĩa ổn định.
 
 ## Tài liệu tham khảo
@@ -381,4 +381,4 @@ Writable layer nhận thay đổi file không đi qua mount. Vì vậy Container
 - Docker CLI Reference, [docker container rm](https://docs.docker.com/reference/cli/docker/container/rm/)
 - Open Container Initiative, [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/main/spec.md)
 
-[Mục lục Foundation](README.md)
+[← 2. Docker hoạt động như thế nào?](02-docker-hoat-dong-nhu-the-nao.md) · [Mục lục Foundation](README.md) · [4. Docker Container →](04-docker-container.md)

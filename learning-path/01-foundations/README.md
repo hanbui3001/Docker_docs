@@ -7,7 +7,7 @@ Phần này xây dựng mental model nền tảng cần thiết để hiểu m�
 Loại: Learning path index
 Cấp độ: Beginner
 Điều kiện: Không yêu cầu kiến thức Docker trước đó
-Thời gian dự kiến hiện tại: Khoảng 35 phút cho nội dung đã xuất bản. Ước tính của toàn Part sẽ được chốt khi cả sáu chapter tồn tại.
+Thời gian dự kiến: Khoảng 3 giờ cho toàn bộ sáu chapter, chưa tính thời gian tự kiểm tra và thực hành quan sát.
 
 ## Phạm vi của Foundation
 
@@ -26,18 +26,18 @@ Volume, Network và Registry chỉ được giới thiệu ngắn khi cần hoà
 
 | Chapter | Trạng thái |
 |---|---|
-| 1. Docker là gì? | Đã lên kế hoạch |
-| 2. Docker hoạt động như thế nào? | Đã lên kế hoạch |
+| [1. Docker là gì?](01-docker-la-gi.md) | Có thể đọc |
+| [2. Docker hoạt động như thế nào?](02-docker-hoat-dong-nhu-the-nao.md) | Có thể đọc |
 | [3. Docker Image](03-docker-image.md) | Có thể đọc |
-| 4. Docker Container | Đã lên kế hoạch |
-| 5. Image và Container | Đã lên kế hoạch |
-| 6. Bức tranh tổng thể | Đã lên kế hoạch |
+| [4. Docker Container](04-docker-container.md) | Có thể đọc |
+| [5. Image và Container](05-image-va-container.md) | Có thể đọc |
+| [6. Bức tranh tổng thể](06-buc-tranh-tong-the.md) | Có thể đọc |
 
-## Cách đọc trong giai đoạn hiện tại
+## Cách đọc
 
-Chapter Docker Image được ưu tiên triển khai trước để kiểm chứng format Explanation chuẩn sẽ dùng cho các chapter lý thuyết sau này. Đây là thứ tự xuất bản tạm thời, không phải khuyến nghị người mới bỏ qua vĩnh viễn chapter 1 và 2.
+Người mới nên đọc tuần tự từ chapter 1 đến chapter 6. Mỗi chapter xây thêm một lớp mental model: nhận diện vấn đề, hiểu kiến trúc, phân biệt Image và Container, rồi kết nối các object trong một luồng tổng thể.
 
-Khi đủ sáu chapter, người mới nên học theo thứ tự từ 1 đến 6 để có ngữ cảnh trước khi đi sâu vào Image. Trong giai đoạn đầu, chapter Image đóng vai trò bản mẫu để xác nhận cách trình bày mental model, định nghĩa chính xác, cơ chế và quan niệm dễ gây hiểu nhầm.
+Nếu đã có kinh nghiệm, bạn có thể mở thẳng chapter cần ôn. Khi bấm một thuật ngữ sang Glossary, dùng mục **Quay lại nơi đang học** ở cuối định nghĩa để trở về đúng đoạn vừa đọc.
 
 ## Checklist hoàn thành
 

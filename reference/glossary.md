@@ -19,6 +19,8 @@ Các source path cục bộ của `COPY` và `ADD` được resolve trong Build 
 
 **Liên quan:** [Dockerfile](#dockerfile), [Filesystem](#filesystem), [Image](#image)
 
+**Quay lại nơi đang học:** [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-build-context) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-build-context) · [6. Bức tranh tổng thể](../learning-path/01-foundations/06-buc-tranh-tong-the.md#back-06-buc-tranh-tong-the-build-context)
+
 ## Container
 
 **Cách hiểu nhanh:** Container là một môi trường chạy cụ thể được tạo từ Image.
@@ -30,6 +32,8 @@ Container dùng các Filesystem layer chỉ đọc của Image và thêm Writabl
 **Ví dụ:** `docker run --name web nginx:1.27` tạo Container `web` từ Image được tham chiếu bởi `nginx:1.27` rồi khởi động process mặc định của Image.
 
 **Liên quan:** [Image](#image), [Instance](#instance), [Writable layer](#writable-layer)
+
+**Quay lại nơi đang học:** [1. Docker là gì?](../learning-path/01-foundations/01-docker-la-gi.md#back-01-docker-la-gi-container) · [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-container) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-container) · [4. Docker Container](../learning-path/01-foundations/04-docker-container.md#back-04-docker-container-container) · [5. Image và Container](../learning-path/01-foundations/05-image-va-container.md#back-05-image-va-container-container) · [6. Bức tranh tổng thể](../learning-path/01-foundations/06-buc-tranh-tong-the.md#back-06-buc-tranh-tong-the-container)
 
 ## Daemon
 
@@ -43,6 +47,8 @@ Trong Docker Desktop, Daemon thường chạy bên trong môi trường Linux do
 
 **Liên quan:** [Container](#container), [Image](#image), [Registry](#registry)
 
+**Quay lại nơi đang học:** [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-daemon) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-daemon)
+
 ## Digest
 
 **Cách hiểu nhanh:** Digest là mã băm dùng để tham chiếu đúng một nội dung cụ thể.
@@ -54,6 +60,8 @@ Digest gắn với object được băm, vì vậy Digest của image index đa 
 **Ví dụ:** `docker pull nginx@sha256:<digest>` yêu cầu nội dung `nginx` có manifest hoặc image index khớp chính xác với Digest đã nêu.
 
 **Liên quan:** [Image](#image), [Repository](#repository), [Tag](#tag)
+
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-digest)
 
 ## Dockerfile
 
@@ -67,6 +75,8 @@ Dockerfile không phải là shell script: mỗi instruction có cú pháp và n
 
 **Liên quan:** [Build context](#build-context), [Image](#image), [Image configuration](#image-configuration)
 
+**Quay lại nơi đang học:** [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-dockerfile) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-dockerfile) · [6. Bức tranh tổng thể](../learning-path/01-foundations/06-buc-tranh-tong-the.md#back-06-buc-tranh-tong-the-dockerfile)
+
 ## Filesystem
 
 **Cách hiểu nhanh:** Filesystem là cây thư mục và file mà một môi trường có thể nhìn thấy tại các đường dẫn như `/app/app.jar`.
@@ -78,6 +88,8 @@ Hai đường dẫn có cùng chuỗi ký tự nhưng thuộc hai Filesystem kh�
 **Ví dụ:** Với `COPY app.jar /app/app.jar`, `app.jar` được đọc từ Filesystem của Build context, còn `/app/app.jar` được tạo trong Filesystem của Image đang build.
 
 **Liên quan:** [Build context](#build-context), [Filesystem layer](#filesystem-layer), [Writable layer](#writable-layer)
+
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-filesystem) · [4. Docker Container](../learning-path/01-foundations/04-docker-container.md#back-04-docker-container-filesystem)
 
 ## Filesystem layer
 
@@ -91,6 +103,8 @@ Layer của Image được dùng như dữ liệu chỉ đọc và có thể đ�
 
 **Liên quan:** [Filesystem](#filesystem), [Image](#image), [Writable layer](#writable-layer)
 
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-filesystem-layer)
+
 ## Image
 
 **Cách hiểu nhanh:** Image là gói mẫu chỉ đọc dùng để tạo Container.
@@ -102,6 +116,8 @@ Nội dung đã được định danh bằng Digest không bị sửa tại ch�
 **Ví dụ:** `docker image pull nginx:1.27` tải Image mà Tag `1.27` của Repository `nginx` đang tham chiếu tại thời điểm pull.
 
 **Liên quan:** [Container](#container), [Filesystem layer](#filesystem-layer), [Image configuration](#image-configuration)
+
+**Quay lại nơi đang học:** [1. Docker là gì?](../learning-path/01-foundations/01-docker-la-gi.md#back-01-docker-la-gi-image) · [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-image) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-image) · [4. Docker Container](../learning-path/01-foundations/04-docker-container.md#back-04-docker-container-image) · [5. Image và Container](../learning-path/01-foundations/05-image-va-container.md#back-05-image-va-container-image) · [6. Bức tranh tổng thể](../learning-path/01-foundations/06-buc-tranh-tong-the.md#back-06-buc-tranh-tong-the-image)
 
 ## Image configuration
 
@@ -115,6 +131,8 @@ Image configuration không chứa byte của các file trong Image filesystem; d
 
 **Liên quan:** [Dockerfile](#dockerfile), [Image](#image), [Metadata](#metadata)
 
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-image-configuration)
+
 ## Instance
 
 **Cách hiểu nhanh:** Instance là một bản thể cụ thể được tạo từ một khuôn hoặc định nghĩa dùng lại được.
@@ -126,6 +144,8 @@ Image configuration không chứa byte của các file trong Image filesystem; d
 **Ví dụ:** Chạy `docker run --name web-1 nginx:1.27` và `docker run --name web-2 nginx:1.27` tạo hai Container instance khác nhau từ cùng một Image reference.
 
 **Liên quan:** [Container](#container), [Image](#image), [Writable layer](#writable-layer)
+
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-instance) · [4. Docker Container](../learning-path/01-foundations/04-docker-container.md#back-04-docker-container-instance)
 
 ## Metadata
 
@@ -139,6 +159,8 @@ Metadata không đồng nghĩa với một file duy nhất hoặc một vị tr�
 
 **Liên quan:** [Dockerfile](#dockerfile), [Image](#image), [Image configuration](#image-configuration)
 
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-metadata)
+
 ## Registry
 
 **Cách hiểu nhanh:** Registry là dịch vụ lưu trữ và phân phối Image qua mạng.
@@ -150,6 +172,8 @@ Registry là dịch vụ, còn Repository là không gian tên cho một nhóm n
 **Ví dụ:** Trong `docker pull registry.example.com/team/api:1.0`, `registry.example.com` xác định Registry mà Docker client liên hệ.
 
 **Liên quan:** [Digest](#digest), [Repository](#repository), [Tag](#tag)
+
+**Quay lại nơi đang học:** [1. Docker là gì?](../learning-path/01-foundations/01-docker-la-gi.md#back-01-docker-la-gi-registry) · [2. Docker hoạt động như thế nào?](../learning-path/01-foundations/02-docker-hoat-dong-nhu-the-nao.md#back-02-docker-hoat-dong-nhu-the-nao-registry) · [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-registry) · [6. Bức tranh tổng thể](../learning-path/01-foundations/06-buc-tranh-tong-the.md#back-06-buc-tranh-tong-the-registry)
 
 ## Repository
 
@@ -163,6 +187,8 @@ Repository trong ngữ cảnh này không phải Git repository. Trong một Ima
 
 **Liên quan:** [Image](#image), [Registry](#registry), [Tag](#tag)
 
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-repository)
+
 ## Tag
 
 **Cách hiểu nhanh:** Tag là nhãn dễ đọc mà con người dùng để tham chiếu một Image trong Repository.
@@ -175,6 +201,8 @@ Hai lần dùng cùng một Tag ở hai thời điểm khác nhau không bảo �
 
 **Liên quan:** [Digest](#digest), [Image](#image), [Repository](#repository)
 
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-tag)
+
 ## Writable layer
 
 **Cách hiểu nhanh:** Writable layer là lớp riêng cho phép một Container ghi thay đổi lên Filesystem trong vòng đời của nó.
@@ -186,3 +214,5 @@ Mỗi Container có Writable layer riêng. Dữ liệu trong layer này bị xó
 **Ví dụ:** Nếu process trong Container ghi `/tmp/result.txt` mà `/tmp` không phải mount, file đó nằm trong Writable layer và biến mất khi Container bị xóa.
 
 **Liên quan:** [Container](#container), [Filesystem](#filesystem), [Filesystem layer](#filesystem-layer)
+
+**Quay lại nơi đang học:** [3. Docker Image](../learning-path/01-foundations/03-docker-image.md#back-03-docker-image-writable-layer) · [4. Docker Container](../learning-path/01-foundations/04-docker-container.md#back-04-docker-container-writable-layer) · [5. Image và Container](../learning-path/01-foundations/05-image-va-container.md#back-05-image-va-container-writable-layer)
