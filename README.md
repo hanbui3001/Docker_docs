@@ -43,17 +43,23 @@ Lộ trình đi từ **hiểu** mental model, **điều khiển** vòng đời, 
 | [4. Docker Container](learning-path/01-foundations/04-docker-container.md) | Runtime instance, lifecycle, isolation và writable state | Có thể đọc |
 | [5. Image và Container](learning-path/01-foundations/05-image-va-container.md) | Mental model kết hợp và các quan hệ vòng đời | Có thể đọc |
 | [6. Bức tranh tổng thể](learning-path/01-foundations/06-buc-tranh-tong-the.md) | Luồng từ Dockerfile đến Image, Registry, Container, dữ liệu và kết nối | Có thể đọc |
-| Part 02. CLI & Lifecycle | Cú pháp CLI và vòng đời Docker object | Thiết kế đã được duyệt; chưa triển khai |
-| Part 03. Storage & Networking | Volume, bind mount, network và kết nối service | Thiết kế đã được duyệt; chưa triển khai |
-| Part 04. Dockerfile | Build context, instruction, cache và multi-stage build | Thiết kế đã được duyệt; chưa triển khai |
-| Part 05. Docker Compose | Mô tả và phối hợp ứng dụng nhiều service | Thiết kế đã được duyệt; chưa triển khai |
-| Part 06. Registry & Delivery | Tag, Digest, Registry và quy trình phân phối Image | Thiết kế đã được duyệt; chưa triển khai |
-| Part 07. Production | Bảo mật, tài nguyên, quan sát và vận hành | Thiết kế đã được duyệt; chưa triển khai |
-| Part 08. Troubleshooting | Điều tra trạng thái, log, network, storage và build | Thiết kế đã được duyệt; chưa triển khai |
+| [Part 02. CLI & Lifecycle](learning-path/02-cli-and-lifecycle/README.md) | Cú pháp CLI, vòng đời và quan sát Docker object | Có thể đọc |
+| [Part 03. Storage & Networking](learning-path/03-storage-and-networking/README.md) | Volume, bind mount, tmpfs, network và kết nối service | Có thể đọc |
+| [Part 04. Dockerfile](learning-path/04-dockerfile/README.md) | Build context, instruction, cache, multi-stage và Java Image | Có thể đọc |
+| [Part 05. Docker Compose](learning-path/05-docker-compose/README.md) | Mô tả, phối hợp và vận hành ứng dụng nhiều service | Có thể đọc |
+| [Part 06. Registry & Delivery](learning-path/06-registry-and-delivery/README.md) | Image reference, Tag, Digest, Registry và delivery flow | Có thể đọc |
+| [Part 07. Production](learning-path/07-production/README.md) | Bảo mật, tài nguyên, health, observability và readiness | Có thể đọc |
+| [Part 08. Troubleshooting](learning-path/08-troubleshooting/README.md) | Điều tra build, process, network, storage, Compose và disk | Có thể đọc |
 
 Tài liệu dùng chung hiện có:
 
 - [Docker Glossary](reference/glossary.md) — định nghĩa thống nhất cho các thuật ngữ cốt lõi.
+- [Docker CLI Reference](reference/commands/README.md) — bảng tra lệnh và syntax thường dùng.
+- [Dockerfile Reference](reference/dockerfile/README.md) — instruction và build options.
+- [Docker Compose Reference](reference/compose/README.md) — Compose keys và CLI commands.
+- [Tutorial: Dockerize Spring Boot với Gradle](tutorials/dockerize-spring-boot-gradle.md) — bài thực hành build và chạy ứng dụng Gradle.
+- [Tutorial: Dockerize Spring Boot với Maven](tutorials/dockerize-spring-boot-maven.md) — bài thực hành tương ứng cho Maven.
+- [How-to Guides](how-to/README.md) — quy trình ngắn để xử lý các công việc vận hành cụ thể.
 - [Docker Documentation Style Guide](STYLE-GUIDE.md) — quy chuẩn biên tập, cấu trúc và kiểm chứng nội dung.
 
 ## Quy ước của repository
@@ -70,8 +76,9 @@ Tài liệu dùng chung hiện có:
 
 | Phạm vi | Trạng thái |
 |---|---|
-| Slice đầu tiên: book cover, quy chuẩn, glossary và Foundation hoàn chỉnh | Hoàn thành |
-| Part 01 hoàn chỉnh | Có thể đọc |
-| Parts 02-08 | Thiết kế đã được duyệt; chưa triển khai |
+| Kiến trúc tài liệu, quy chuẩn và Glossary | Hoàn thành |
+| Learning Path Part 01-08 | Có thể đọc |
+| CLI, Dockerfile và Compose Reference | Có thể tra cứu |
+| Java Tutorials và task-oriented How-to | Có thể thực hành |
 
-Part 01 hiện là nền tảng hoàn chỉnh để bắt đầu Part 02: CLI & Lifecycle. Các phần chưa có file đích tiếp tục được giữ dưới dạng plain text để không tạo broken link.
+Bộ Learning Path hiện đã đi trọn luồng: hiểu Docker → điều khiển object → quản lý data/network → build Image → phối hợp service → phân phối artifact → vận hành → chẩn đoán.

@@ -1,0 +1,226 @@
+{
+  "main": {
+    "id": "8e13ac60228da54b",
+    "type": "split",
+    "children": [
+      {
+        "id": "821744cb8581ad94",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "82654ef282bc9b89",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "learning-path/05-docker-compose/03-service-image-va-build.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03-service-image-va-build"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7b3853b96a59b2a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "e9b93e67c2f9cf7f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ddfc325b109bb0f4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "d63bce9273427f71",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d1b92df77addffb2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7744f853778b2787",
+    "type": "split",
+    "children": [
+      {
+        "id": "a816e69af2ba8e75",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37dc7f6856430f34",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "learning-path/05-docker-compose/03-service-image-va-build.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 03-service-image-va-build"
+            }
+          },
+          {
+            "id": "4dcd83291ff4a739",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "learning-path/05-docker-compose/03-service-image-va-build.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 03-service-image-va-build"
+            }
+          },
+          {
+            "id": "7a362e8f3b58cdae",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "7a9dac46da7f922b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "7efe8e8e6f0c42ca",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "learning-path/05-docker-compose/03-service-image-va-build.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 03-service-image-va-build"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "82654ef282bc9b89",
+  "lastOpenFiles": [
+    "learning-path/05-docker-compose/02-cach-doc-compose-yaml.md",
+    "learning-path/05-docker-compose/01-compose-la-gi.md",
+    "learning-path/01-foundations/06-buc-tranh-tong-the.md",
+    "learning-path/08-troubleshooting/08-diagnostic-playbook.md",
+    "learning-path/08-troubleshooting/07-disk-usage-va-cleanup.md",
+    "learning-path/08-troubleshooting/06-loi-docker-compose.md",
+    "how-to/clean-docker-disk-safely.md",
+    "how-to/preserve-data-when-recreating-container.md",
+    "how-to/diagnose-published-port.md",
+    "how-to/inspect-stopped-container.md",
+    "how-to/README.md",
+    "learning-path/08-troubleshooting/05-loi-storage-va-permission.md",
+    "learning-path/08-troubleshooting/04-loi-port-va-network.md",
+    "learning-path/08-troubleshooting/03-container-khong-khoi-dong.md",
+    "how-to",
+    "reference/compose/compose-commands.md",
+    "reference/dockerfile/docker-build-options.md",
+    "reference/dockerfile/instructions.md",
+    "reference/dockerfile/README.md",
+    "reference/compose/compose-file-keys.md",
+    "reference/compose/README.md",
+    "learning-path/08-troubleshooting/02-loi-build-image.md",
+    "learning-path/08-troubleshooting/README.md",
+    "learning-path/08-troubleshooting/01-phuong-phap-chan-doan.md",
+    "learning-path/08-troubleshooting",
+    "reference/commands/docker-exec.md",
+    "reference/commands/docker-logs.md",
+    "reference/commands/docker-ps.md",
+    "learning-path/06-registry-and-delivery",
+    "learning-path/07-production",
+    "learning-path/03-storage-and-networking",
+    "reference/commands",
+    "learning-path/02-cli-and-lifecycle",
+    "reference/compose",
+    "learning-path/05-docker-compose",
+    "reference/dockerfile",
+    "Untitled.canvas"
+  ]
+}

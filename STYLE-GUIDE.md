@@ -145,6 +145,8 @@ Quy tắc thuật ngữ:
 - Với ba đến sáu thuật ngữ khó trong một section, dùng `NOTE` hoặc `IMPORTANT` theo mục 7, hoặc dùng bảng thuật ngữ thông thường thay vì tạo loại callout mới.
 - Khi cần định nghĩa sâu hơn, liên kết đến glossary trung tâm bằng relative repository link.
 - Một định nghĩa đầy đủ theo thứ tự: cách hiểu nhanh, nghĩa Docker chính xác, ví dụ hoặc ẩn dụ, rồi giới hạn của ẩn dụ.
+- Không dùng một danh sách thuật ngữ cố định cho mọi chapter. Mỗi chapter tự nhận diện các từ mới, khó hoặc có nghĩa chuyên biệt trong đúng chủ đề đang học; giải thích tại chỗ trước, rồi chỉ đưa vào Glossary khi thuật ngữ có giá trị tái sử dụng ở nhiều chapter.
+- Một từ tiếng Anh phổ biến không bắt buộc có hộp chú thích riêng nếu câu chứa nó đã giải thích đủ rõ. Ngược lại, một từ tưởng quen nhưng có nghĩa Docker-specific phải được làm rõ ngay tại lần dùng đầu tiên.
 
 Khi một thuật ngữ dẫn người đọc sang Glossary, chapter phải đặt một source anchor ngay tại lần xuất hiện đó. Glossary thêm mục **Quay lại nơi đang học** ở cuối định nghĩa và trỏ về source anchor, để người đọc trở lại đúng đoạn thay vì đầu chapter.
 
