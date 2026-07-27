@@ -7,6 +7,7 @@ Phần này xây dựng mental model nền tảng cần thiết để hiểu m�
 Loại: Learning path index
 Cấp độ: Beginner
 Điều kiện: Không yêu cầu kiến thức Docker trước đó
+Thời gian dự kiến hiện tại: Khoảng 35 phút cho nội dung đã xuất bản. Ước tính của toàn Part sẽ được chốt khi cả sáu chapter tồn tại.
 
 ## Phạm vi của Foundation
 

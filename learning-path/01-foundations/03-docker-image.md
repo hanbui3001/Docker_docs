@@ -5,13 +5,19 @@
 > **Loại:** Explanation · **Cấp độ:** Beginner · **Thời gian:** Khoảng 35 phút<br>
 > **Nguồn chính:** [What is an image?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/) · [Understanding the image layers](https://docs.docker.com/get-started/docker-concepts/building-images/understanding-image-layers/) · [docker image](https://docs.docker.com/reference/cli/docker/image/) · [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/main/spec.md)
 
+> **Sau chapter này, bạn có thể:**
+> - Phân biệt nội dung filesystem, Image configuration và runtime state.
+> - Giải thích layer, tính bất biến, Tag và Digest bằng mental model chính xác.
+> - Mô tả luồng build, pull, push và tạo Container từ Image.
+> - Dùng output inspect và history để kiểm chứng quan hệ Image–Container.
+
 [Mục lục Foundation](README.md)
 
 ---
 
 ## 1. Vấn đề cần giải quyết
 
-Giả sử một nhóm phát triển có mã nguồn Spring Boot và file `pom.xml`. Một thành viên chạy ứng dụng thành công, nhưng máy khác lại dùng phiên bản Java khác, thiếu thư viện đã tải về, không có file cấu hình cần thiết hoặc khởi động bằng tham số khác. Mã nguồn giống nhau chưa bảo đảm môi trường chạy giống nhau.
+Giả sử một nhóm có mã nguồn Spring Boot và `pom.xml`. Một máy chạy thành công, máy khác lại dùng Java khác phiên bản, thiếu thư viện hoặc khởi động bằng tham số khác. Mã nguồn giống nhau chưa bảo đảm môi trường chạy giống nhau.
 
 Để tái tạo một ứng dụng đang chạy, hệ thống còn cần nhiều đầu vào ngoài mã nguồn:
 
@@ -21,9 +27,9 @@ Giả sử một nhóm phát triển có mã nguồn Spring Boot và file `pom.x
 - Nội dung **[Filesystem](../../reference/glossary.md#filesystem)** — cây thư mục và file mà môi trường nhìn thấy — phải có quyền truy cập và cấu trúc dự kiến.
 - Cấu hình khởi động như command (lệnh), environment variable (biến môi trường), working directory (thư mục làm việc) và user (tài khoản) phải nhất quán.
 
-Cách truyền thống là viết một tài liệu cài đặt thật dài rồi hy vọng mọi người làm đúng. Vấn đề là tài liệu mô tả một môi trường, còn máy thực tế vẫn có thể lệch khỏi mô tả. Docker giải quyết một phần quan trọng của khoảng cách này bằng **[Image](../../reference/glossary.md#image)** — gói mẫu chỉ đọc dùng làm đầu vào để tạo Container.
+Cách truyền thống là viết tài liệu cài đặt rồi hy vọng máy thực tế không lệch khỏi mô tả. Docker thu hẹp khoảng cách này bằng **[Image](../../reference/glossary.md#image)** — gói mẫu chỉ đọc dùng làm đầu vào để tạo Container.
 
-Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ điều hành), CPU architecture (kiến trúc bộ xử lý), secret (dữ liệu bí mật), network (mạng), volume (vùng dữ liệu độc lập) và tài nguyên lúc chạy vẫn đến từ bên ngoài. Image không nhất thiết chứa hệ điều hành hoàn chỉnh: nhiều Image chỉ có file tối thiểu. Container dùng kernel do môi trường chạy container runtime cung cấp. Với Linux Container trên Docker Desktop, kernel nằm trong môi trường Linux do Docker Desktop quản lý, như Linux VM (máy ảo Linux) hoặc WSL 2, không phải trực tiếp kernel Windows/macOS; nền tảng hoặc chế độ cô lập khác có thể khác. Mental model, tức mô hình tư duy, đúng là “đóng gói nội dung và giá trị mặc định”, không phải “đóng gói cả một máy”.
+Image không giải quyết mọi khác biệt hạ tầng. Kernel (nhân hệ điều hành), CPU architecture (kiến trúc bộ xử lý), secret (dữ liệu bí mật), network (mạng), volume (vùng dữ liệu độc lập) và tài nguyên runtime vẫn đến từ bên ngoài. Nhiều Image chỉ chứa file tối thiểu, không phải hệ điều hành hoàn chỉnh. Container dùng kernel do môi trường runtime cung cấp; Linux Container trên Docker Desktop dùng môi trường Linux được quản lý như Linux VM hoặc WSL 2, không trực tiếp dùng kernel Windows/macOS. Mental model đúng là “đóng gói nội dung và giá trị mặc định”, không phải “đóng gói cả một máy”.
 
 ## 2. Hiểu nhanh và định nghĩa chính xác
 
@@ -52,25 +58,23 @@ Khi Docker tạo một Container từ Image, Container là một **[Instance](..
 
 ### 3.1 Tái tạo đầu vào triển khai
 
-Image gom nội dung ứng dụng và các giá trị mặc định vào một object có thể nhận diện. Thay vì yêu cầu máy đích tự cài Java và chép file, nhóm chuyển một Image đã tạo trước. Cùng nội dung Image và cấu hình runtime tương đương cho Container một điểm xuất phát nhất quán hơn.
-
-“Tái tạo” không có nghĩa mọi lần chạy cho kết quả tuyệt đối giống nhau: thời gian, dữ liệu ngoài, network, secret và service phụ thuộc vẫn có thể khác. Image ổn định đầu vào đóng gói, không đóng băng thế giới bên ngoài.
+Image gom ứng dụng và giá trị mặc định vào một object có thể nhận diện, thay cho việc máy đích tự cài Java và chép file. Cùng nội dung Image và cấu hình runtime tương đương tạo điểm xuất phát nhất quán hơn; thời gian, dữ liệu ngoài, network, secret và service phụ thuộc vẫn có thể khác.
 
 ### 3.2 Phân phối một đơn vị chuẩn hóa
 
-Image có thể đi giữa máy phát triển, hệ thống CI và môi trường triển khai qua **[Registry](../../reference/glossary.md#registry)** — dịch vụ lưu trữ, phân phối Image. **CI (continuous integration)** là quá trình tự động tích hợp và kiểm tra thay đổi mã nguồn. Chương này chỉ xem Registry như nơi trao đổi nội dung; đăng nhập, policy (chính sách) và pipeline (chuỗi tự động hóa) thuộc phần sau.
+Image có thể đi giữa máy phát triển, hệ thống CI và môi trường triển khai qua **[Registry](../../reference/glossary.md#registry)** — dịch vụ lưu trữ, phân phối Image. **CI (continuous integration)** tự động tích hợp và kiểm tra thay đổi; đăng nhập, policy và pipeline thuộc phần sau.
 
 ### 3.3 Đầu vào có phiên bản cho deployment
 
-Nhóm có thể tạo Image mới cho mỗi thay đổi. Deployment, tức lần triển khai, chọn một Image reference (chuỗi tham chiếu) thay vì lắp ghép môi trường thủ công. Cách này giúp xác định phiên bản nếu phân biệt tên tham chiếu với định danh nội dung.
+Mỗi deployment có thể chọn một Image reference thay vì lắp ghép môi trường thủ công, miễn là phân biệt tên tham chiếu với định danh nội dung.
 
 ### 3.4 Giữ điểm xuất phát giữa máy cục bộ và CI gần nhau
 
-Lập trình viên và CI có thể chạy Container từ cùng Image. Environment, mount (điểm gắn dữ liệu) hoặc command vẫn có thể khác, nhưng filesystem và mặc định bắt đầu từ cùng gói. Khi có lệch, kiểm tra Image trước rồi xét đầu vào runtime.
+Lập trình viên và CI có thể dùng cùng Image. Environment, mount hoặc command vẫn có thể khác, nhưng filesystem và mặc định bắt đầu từ cùng gói.
 
 ### 3.5 Một Image tạo nhiều Container
 
-Image không bị “tiêu thụ” sau một lần chạy. Mỗi Container nhận runtime state (trạng thái lúc chạy) và vùng ghi riêng, còn các layer Image có thể được chia sẻ. Vì vậy nhiều instance không cần nhiều Image giống hệt nhau.
+Image không bị “tiêu thụ” sau một lần chạy. Nhiều Container chia sẻ layer chỉ đọc nhưng có runtime state và vùng ghi riêng.
 
 ---
 
@@ -179,9 +183,7 @@ docker image pull nginx:alpine
 
 Ví dụ output ghi `sha256:4a73073b...c1752`, `Downloaded newer image` và `docker.io/library/nginx:alpine`. Digest có thể khác về sau vì Tag có thể di chuyển.
 
-Trước lệnh, kho cục bộ có thể thiếu reference hoặc content blob (khối dữ liệu). Sau lệnh, nó có metadata và layer cần thiết; layer đã có được tái sử dụng. Đây là bằng chứng Image có thể phân phối theo nội dung.
-
-Cleanup (dọn dẹp): lệnh không tạo Container. Chapter giữ Image cho các quan sát sau; xóa Image là thay đổi riêng, không cần để hoàn nguyên Container demo.
+Trước lệnh, kho cục bộ có thể thiếu reference hoặc content blob. Sau lệnh, nó có metadata và layer cần thiết; layer sẵn có được tái sử dụng. Lệnh không tạo Container, nên không cần cleanup.
 
 ### 7.2 Liệt kê Image cục bộ: `docker image ls`
 
@@ -198,7 +200,7 @@ docker image ls
 
 Quan sát `REPOSITORY`, `TAG`, `IMAGE ID`, `CREATED`, `SIZE` và dòng `nginx:alpine`. `SIZE` là cách Docker Engine (bộ máy thực thi Docker) biểu diễn kích thước Image, không phải số byte vừa tải.
 
-Đây là phép đọc, nên trạng thái không đổi. Tag hiện cạnh Image ID, cho thấy tên tham chiếu không phải toàn bộ nội dung. Không cần cleanup.
+Đây là phép đọc, nên trạng thái không đổi. Tag hiện cạnh Image ID, cho thấy tên tham chiếu không phải toàn bộ nội dung.
 
 ### 7.3 Xem cấu trúc chi tiết: `docker image inspect`
 
@@ -215,7 +217,7 @@ docker image inspect nginx:alpine
 
 Quan sát `Id`, `RepoTags`, `RepoDigests`, `Os`, `Architecture`, `Config`, `RootFS.Layers`. Ví dụ output cho thấy `linux/amd64`, 8 layer, entrypoint (chương trình vào) `/docker-entrypoint.sh` và command mặc định `nginx -g daemon off;`. Đây không phải hợp đồng vĩnh viễn của Tag.
 
-Hai nhánh `Config` và `RootFS.Layers` chứng minh configuration khác nội dung filesystem; `RepoTags` và `RepoDigests` tách tên dễ đọc khỏi tham chiếu nội dung. Lệnh chỉ đọc, không cần cleanup.
+Hai nhánh `Config` và `RootFS.Layers` chứng minh configuration khác nội dung filesystem; `RepoTags` và `RepoDigests` tách tên dễ đọc khỏi tham chiếu nội dung.
 
 ### 7.4 Xem lịch sử tạo Image: `docker image history`
 
@@ -232,7 +234,7 @@ docker image history nginx:alpine
 
 Quan sát `IMAGE`, `CREATED`, `CREATED BY`, `SIZE`, `COMMENT` và so sánh kích thước dương với `0B`. Ví dụ output có 20 dòng history nhưng 8 filesystem layer: history không ánh xạ một-một với layer; instruction đổi configuration có thể cho dòng `0B`.
 
-Lệnh chỉ đọc và không phải bản sao nguyên vẹn của Dockerfile: output có thể bị rút gọn, history của Image nền có thể hiện `<missing>`. Không cần cleanup.
+History chỉ đọc và không phải bản sao nguyên vẹn của Dockerfile: output có thể bị rút gọn, Image nền có thể hiện `<missing>`.
 
 ### 7.5 Tạo một runtime instance: `docker container run`
 
@@ -250,9 +252,15 @@ docker container run --name image-demo --detach nginx:alpine
 | `--detach` | Command option chạy Container ở nền và in Container ID thay vì giữ terminal gắn với process. |
 | `nginx:alpine` | Argument Image reference dùng làm đầu vào tạo Container. |
 
-Ví dụ output là Container ID bắt đầu `736cee59992b`. Inspect xác nhận Container dùng Image đã pull và ở trạng thái `running`. Không cần truy cập Nginx: bằng chứng chỉ là runtime instance mới.
+Về lifecycle, `run` bao gồm tạo như `docker container create` rồi khởi động như `docker container start`: nó luôn tạo Container mới, không khởi động lại một Container đã tồn tại.
 
-Trước lệnh, Image không có process hay lifecycle state (trạng thái vòng đời). Sau lệnh, `image-demo` có process, `running` và một **[Writable layer](../../reference/glossary.md#writable-layer)** — lớp ghi riêng của Container; Image nguồn không đổi.
+Trước `run`, Image không có process hay lifecycle state. Sau `run`, `image-demo` có process, trạng thái `running` và một **[Writable layer](../../reference/glossary.md#writable-layer)** — lớp ghi riêng của Container; Image nguồn không đổi.
+
+```bash
+docker container inspect --format 'Image={{.Image}}; Status={{.State.Status}}' image-demo
+```
+
+Output có dạng `Image=sha256:...; Status=running`. Trường `Image` nối Container với Image ID đã dùng; `Status` chứng minh runtime instance đang chạy mà không cần truy cập Nginx.
 
 Cleanup bắt buộc là xóa `image-demo`. Không dùng `--rm` vì object cần tồn tại đủ lâu để kiểm tra; lệnh kế tiếp cleanup rõ ràng.
 
@@ -274,7 +282,14 @@ docker container rm --force image-demo
 
 Output thành công in `image-demo`. Trước lệnh, Container `running`; sau lệnh, Container và writable layer không còn. Inspect tiếp nhận `No such container: image-demo`, còn Image vẫn có cục bộ.
 
-Đây vừa là cleanup vừa chứng minh ranh giới object. Writable layer không thể khôi phục nếu chưa lưu ra ngoài; Image có thể tạo instance mới nhưng không phục hồi instance cũ.
+```bash
+docker container inspect image-demo
+docker image inspect nginx:alpine --format 'Image={{.Id}}'
+```
+
+Lệnh đầu thất bại với `No such container: image-demo`; lệnh sau vẫn in Image ID và thành công. Hai kết quả xác nhận Container đã bị xóa nhưng Image nguồn còn nguyên.
+
+Ở đây `--force` gộp dừng cưỡng bức và xóa cho demo dùng một lần. Luồng trật tự là `docker container stop image-demo` rồi `docker container rm image-demo`, cho process cơ hội kết thúc trước khi xóa. Dù theo cách nào, writable layer mất theo Container nếu chưa lưu ra ngoài.
 
 ## 8. Quan hệ giữa Image và Container
 
