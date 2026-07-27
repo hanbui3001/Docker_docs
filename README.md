@@ -37,7 +37,7 @@ Lộ trình đi từ **hiểu** mental model, **điều khiển** vòng đời, 
 | Phần | Trọng tâm | Trạng thái |
 |---|---|---|
 | [Part 01. Docker Foundations](learning-path/01-foundations/README.md) | Mental model nền tảng về Docker, Image, Container và hệ sinh thái | Đang triển khai |
-| 3. Docker Image | Cấu trúc Image, layer, metadata và quan hệ với Container | Đang triển khai |
+| [3. Docker Image](learning-path/01-foundations/03-docker-image.md) | Cấu trúc Image, layer, metadata và quan hệ với Container | Có thể đọc |
 | Part 02. CLI & Lifecycle | Cú pháp CLI và vòng đời Docker object | Thiết kế đã được duyệt; chưa triển khai |
 | Part 03. Storage & Networking | Volume, bind mount, network và kết nối service | Thiết kế đã được duyệt; chưa triển khai |
 | Part 04. Dockerfile | Build context, instruction, cache và multi-stage build | Thiết kế đã được duyệt; chưa triển khai |

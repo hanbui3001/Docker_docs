@@ -27,7 +27,7 @@ Volume, Network và Registry chỉ được giới thiệu ngắn khi cần hoà
 |---|---|
 | 1. Docker là gì? | Đã lên kế hoạch |
 | 2. Docker hoạt động như thế nào? | Đã lên kế hoạch |
-| 3. Docker Image | Đang triển khai |
+| [3. Docker Image](03-docker-image.md) | Có thể đọc |
 | 4. Docker Container | Đã lên kế hoạch |
 | 5. Image và Container | Đã lên kế hoạch |
 | 6. Bức tranh tổng thể | Đã lên kế hoạch |
