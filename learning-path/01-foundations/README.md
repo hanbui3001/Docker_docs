@@ -4,8 +4,8 @@
 
 Phần này xây dựng mental model nền tảng cần thiết để hiểu mọi chủ đề Docker ở các phần sau.
 
-Loại: Learning path index<br>
-Cấp độ: Beginner<br>
+Loại: Learning path index
+Cấp độ: Beginner
 Điều kiện: Không yêu cầu kiến thức Docker trước đó
 
 ## Phạm vi của Foundation
