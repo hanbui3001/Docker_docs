@@ -13,7 +13,7 @@
 
 **Định nghĩa chính xác:** Build context là tập hợp file và thư mục được gửi hoặc cung cấp cho builder khi chạy một lệnh build. Context có thể đến từ thư mục cục bộ, Git repository, URL hoặc đầu vào chuẩn, tùy cách gọi builder; file `.dockerignore` có thể loại bớt nội dung trước khi builder xử lý.
 
-Các source path của `COPY` và `ADD` được resolve trong Build context, không phải tùy ý trên toàn bộ Filesystem của máy gọi lệnh. Dockerfile có thể nằm trong context hoặc được chỉ định riêng, nhưng quyền truy cập source của các instruction vẫn bị giới hạn bởi context đã chọn.
+Các source path cục bộ của `COPY` và `ADD` được resolve trong Build context, không phải tùy ý trên toàn bộ Filesystem của máy gọi lệnh. Riêng `ADD` cũng chấp nhận một số nguồn từ xa như URL hoặc Git repository; các nguồn đó không được resolve như path cục bộ. Dockerfile có thể nằm trong context hoặc được chỉ định riêng, nhưng quyền truy cập source cục bộ vẫn bị giới hạn bởi context đã chọn.
 
 **Ví dụ:** Trong `docker build -t demo .`, dấu `.` chọn thư mục hiện tại làm Build context; `COPY app.jar /app/app.jar` chỉ thành công khi `app.jar` có trong context và không bị `.dockerignore` loại bỏ.
 

@@ -177,7 +177,7 @@ docker image pull nginx:alpine
 | `pull` | Action tải Image từ Registry. |
 | `nginx:alpine` | Argument Image reference: repository `nginx`, Tag `alpine`; Registry và không gian tên mặc định được xác định thành `docker.io/library`. |
 
-Quan sát trạng thái từng layer, `Digest`, `Status` và reference đã được xác định. Lần kiểm chứng kết thúc với `sha256:4a73073b...c1752`, `Downloaded newer image` và `docker.io/library/nginx:alpine`. Digest có thể khác về sau vì Tag có thể di chuyển.
+Ví dụ output ghi `sha256:4a73073b...c1752`, `Downloaded newer image` và `docker.io/library/nginx:alpine`. Digest có thể khác về sau vì Tag có thể di chuyển.
 
 Trước lệnh, kho cục bộ có thể thiếu reference hoặc content blob (khối dữ liệu). Sau lệnh, nó có metadata và layer cần thiết; layer đã có được tái sử dụng. Đây là bằng chứng Image có thể phân phối theo nội dung.
 
@@ -213,7 +213,7 @@ docker image inspect nginx:alpine
 | Option | Không có; vì vậy output không bị thu gọn bằng template (mẫu định dạng). |
 | `nginx:alpine` | Argument chọn Image reference cần inspect. |
 
-Quan sát `Id`, `RepoTags`, `RepoDigests`, `Os`, `Architecture`, `Config`, `RootFS.Layers`. Lần kiểm chứng cho thấy `linux/amd64`, 8 layer, entrypoint (chương trình vào) `/docker-entrypoint.sh` và command mặc định `nginx -g daemon off;`. Đây không phải hợp đồng vĩnh viễn của Tag.
+Quan sát `Id`, `RepoTags`, `RepoDigests`, `Os`, `Architecture`, `Config`, `RootFS.Layers`. Ví dụ output cho thấy `linux/amd64`, 8 layer, entrypoint (chương trình vào) `/docker-entrypoint.sh` và command mặc định `nginx -g daemon off;`. Đây không phải hợp đồng vĩnh viễn của Tag.
 
 Hai nhánh `Config` và `RootFS.Layers` chứng minh configuration khác nội dung filesystem; `RepoTags` và `RepoDigests` tách tên dễ đọc khỏi tham chiếu nội dung. Lệnh chỉ đọc, không cần cleanup.
 
@@ -230,11 +230,13 @@ docker image history nginx:alpine
 | Option | Không có; command dài có thể bị rút gọn trong cột `CREATED BY`. |
 | `nginx:alpine` | Argument Image cần xem lịch sử. |
 
-Quan sát `IMAGE`, `CREATED`, `CREATED BY`, `SIZE`, `COMMENT` và so sánh kích thước dương với `0B`. Lần kiểm chứng có 20 dòng history nhưng 8 filesystem layer: history không ánh xạ một-một với layer; instruction đổi configuration có thể cho dòng `0B`.
+Quan sát `IMAGE`, `CREATED`, `CREATED BY`, `SIZE`, `COMMENT` và so sánh kích thước dương với `0B`. Ví dụ output có 20 dòng history nhưng 8 filesystem layer: history không ánh xạ một-một với layer; instruction đổi configuration có thể cho dòng `0B`.
 
 Lệnh chỉ đọc và không phải bản sao nguyên vẹn của Dockerfile: output có thể bị rút gọn, history của Image nền có thể hiện `<missing>`. Không cần cleanup.
 
 ### 7.5 Tạo một runtime instance: `docker container run`
+
+Điều kiện trước: không có Container tên `image-demo`; nếu tên đã tồn tại, `--name` báo xung đột và lệnh không tạo Container mới.
 
 ```bash
 docker container run --name image-demo --detach nginx:alpine
@@ -248,7 +250,7 @@ docker container run --name image-demo --detach nginx:alpine
 | `--detach` | Command option chạy Container ở nền và in Container ID thay vì giữ terminal gắn với process. |
 | `nginx:alpine` | Argument Image reference dùng làm đầu vào tạo Container. |
 
-Output là Container ID; lần kiểm chứng tạo ID bắt đầu `736cee59992b`. Inspect xác nhận Container dùng Image đã pull và ở trạng thái `running`. Không cần truy cập Nginx: bằng chứng cần có chỉ là runtime instance mới.
+Ví dụ output là Container ID bắt đầu `736cee59992b`. Inspect xác nhận Container dùng Image đã pull và ở trạng thái `running`. Không cần truy cập Nginx: bằng chứng chỉ là runtime instance mới.
 
 Trước lệnh, Image không có process hay lifecycle state (trạng thái vòng đời). Sau lệnh, `image-demo` có process, `running` và một **[Writable layer](../../reference/glossary.md#writable-layer)** — lớp ghi riêng của Container; Image nguồn không đổi.
 

@@ -142,7 +142,7 @@ Quy tắc thuật ngữ:
 - Giữ English term và giải thích bằng tiếng Việt ngay trong câu đầu tiên.
 - Dùng chữ đậm cho khái niệm mới được giới thiệu; không tiếp tục bôi đậm mọi lần xuất hiện sau đó.
 - Dùng inline code cho câu lệnh, option, key, path, filename và literal value.
-- Với ba đến sáu thuật ngữ khó trong một section, dùng terminology callout cục bộ.
+- Với ba đến sáu thuật ngữ khó trong một section, dùng `NOTE` hoặc `IMPORTANT` theo mục 7, hoặc dùng bảng thuật ngữ thông thường thay vì tạo loại callout mới.
 - Khi cần định nghĩa sâu hơn, liên kết đến glossary trung tâm bằng relative repository link.
 - Một định nghĩa đầy đủ theo thứ tự: cách hiểu nhanh, nghĩa Docker chính xác, ví dụ hoặc ẩn dụ, rồi giới hạn của ẩn dụ.
 
@@ -198,7 +198,7 @@ Không coi code là tự giải thích. Ngay sau code block phải có văn bả
 - Mỗi Markdown file có đúng một H1 và không bỏ qua heading level.
 - Chapter nội dung dùng H1 và các major section có số thứ tự. Các heading con tiếp tục đúng hierarchy thay vì chọn level theo kích thước hiển thị.
 - Navigation ở đầu và cuối chapter. Mục lục phần luôn có link; link previous và next chỉ xuất hiện khi file đích đã tồn tại.
-- Internal content chỉ dùng relative repository links. Không dùng đường dẫn tuyệt đối, `file://` hoặc link phụ thuộc máy của tác giả.
+- Internal content chỉ dùng relative repository links. Không dùng đường dẫn tuyệt đối, URI cục bộ hoặc link phụ thuộc máy của tác giả.
 - Roadmap chưa có file đích phải hiển thị dưới dạng plain text, không tạo broken link có chủ ý.
 - Link ngoài chỉ dùng cho nguồn và tài nguyên thực sự cần thiết; text của link phải mô tả được đích đến.
 
