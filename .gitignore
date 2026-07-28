@@ -3,3 +3,6 @@
 .DS_Store
 Thumbs.db
 *.log
+docs/
+STYLE-GUIDE.md
+.obsidiant/
